@@ -9,10 +9,8 @@ import { Context as LocationContext } from '../context/LocationContext';
 import useLocation from '../hooks/useLocation';
 
 const TrackCreateScreen = ({ isFocused }) => {
-  const { state, addLocation } = useContext(LocationContext);
-  const [err] = useLocation(isFocused, location => {
-    addLocation(location, state.recording);
-  });
+  const { addLocation } = useContext(LocationContext);
+  const [err] = useLocation(isFocused, addLocation);
 
   return (
     <SafeAreaView forceInset={{ top: 'always' }}>

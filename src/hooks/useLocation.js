@@ -1,13 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import {
   Accuracy,
   requestPermissionsAsync,
   watchPositionAsync
 } from 'expo-location';
+import { Context as LocationContext } from '../context/LocationContext';
 
 export default (tracking, cb) => {
   const [err, setErr] = useState(null);
   const [subscriber, setSubscriber] = useState(null);
+  const {
+    state: { recording }
+  } = useContext(LocationContext);
 
   const startWatching = async () => {
     try {
@@ -21,7 +25,7 @@ export default (tracking, cb) => {
           timeInterval: 1000,
           distanceInterval: 10
         },
-        cb
+        location => cb(location, recording)
       );
       setSubscriber(subscriber);
     } catch (e) {
@@ -36,7 +40,7 @@ export default (tracking, cb) => {
       subscriber.remove();
       setSubscriber(null);
     }
-  }, [tracking]);
+  }, [recording, tracking]);
 
   return [err];
 };
