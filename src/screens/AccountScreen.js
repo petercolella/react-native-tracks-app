@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Button, Text } from 'react-native-elements';
 import { SafeAreaView } from 'react-navigation';
+import { FontAwesome } from '@expo/vector-icons';
+
 import Spacer from '../components/Spacer';
 import { Context as AuthContext } from '../context/AuthContext';
 
@@ -29,5 +31,10 @@ const styles = StyleSheet.create({
     marginTop: 60
   }
 });
+
+AccountScreen.navigationOptions = {
+  title: 'Account',
+  tabBarIcon: <FontAwesome name="gear" size={20} />
+};
 
 export default AccountScreen;
