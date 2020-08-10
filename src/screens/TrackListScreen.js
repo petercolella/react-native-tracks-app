@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { FlatList, TouchableOpacity, StyleSheet } from 'react-native';
-import { ListItem, Text } from 'react-native-elements';
+import { ListItem } from 'react-native-elements';
 import { NavigationEvents } from 'react-navigation';
 import { Context as TrackContext } from '../context/TrackContext';
 
@@ -10,7 +10,6 @@ const TrackListScreen = ({ navigation }) => {
   return (
     <>
       <NavigationEvents onWillFocus={fetchTracks} />
-      <Text h2>Tracks</Text>
       <FlatList
         data={state}
         keyExtractor={item => item._id}
@@ -28,6 +27,11 @@ const TrackListScreen = ({ navigation }) => {
       />
     </>
   );
+};
+
+TrackListScreen.navigationOptions = {
+  title: 'Tracks',
+  headerTitleAlign: 'center'
 };
 
 const styles = StyleSheet.create({});
